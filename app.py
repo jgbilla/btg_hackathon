@@ -4,6 +4,12 @@ import numpy as np
 from modeling_cat import train_model, predict_score, pipeline, features, categorical_features
 
 
+st.markdown("""
+    <h2 style='text-align: center;'>
+        <a href='https://docs.google.com/document/d/1Ur949GM5mvjZjpTAjn-Cnyd4nKmzX1He6tdusI5oNS0/edit?usp=sharing' target='_blank' rel='noopener noreferrer'>View our whitepaper</a>
+    </h2>
+    """, unsafe_allow_html=True)
+
 
 st.title('COMPAS Score Prediction App')
 
