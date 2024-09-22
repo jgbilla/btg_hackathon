@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-from modeling_cat import train_model, predict_score, pipeline, features, categorical_features
+import modeling_cat
 
 
 st.markdown("""
@@ -48,18 +48,18 @@ if st.button('Predict COMPAS Score'):
     }
 
     # Make prediction
-    prediction = predict_score(input_data)
+    prediction = modeling_cat.predict_score(input_data)
 
     st.write(f'The predicted COMPAS score is: **{prediction}**')
 
     # Display feature importances
     st.write('### Feature Importances')
-    feature_importance = pipeline.named_steps['model'].feature_importances_
-    feature_names = (pipeline.named_steps['preprocessor']
+    feature_importance = modeling_cat.pipeline.named_steps['model'].feature_importances_
+    feature_names = (modeling_cat.pipeline.named_steps['preprocessor']
                      .named_transformers_['cat']
                      .named_steps['onehot']
-                     .get_feature_names_out(categorical_features).tolist())
-    feature_names = features + feature_names
+                     .get_feature_names_out(modeling_cat.categorical_features).tolist())
+    feature_names = modeling_cat.features + feature_names
     
     importances = pd.DataFrame({'feature': feature_names, 'importance': feature_importance})
     importances = importances.sort_values('importance', ascending=False)
